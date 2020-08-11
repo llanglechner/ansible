@@ -25,16 +25,21 @@ options:
       - Package name, or package specifier with version.
       - Syntax varies with package manager. For example C(name-1.0) or C(name=1.0).
       - Package names also vary with package manager; this module will not "translate" them per distro. For example C(libyaml-dev), C(libyaml-devel).
+    type: list
+    elements: str
     required: true
   state:
     description:
       - Whether to install (C(present)), or remove (C(absent)) a package.
       - You can use other states like C(latest) ONLY if they are supported by the underlying package module(s) executed.
+    type: str
+    choices: [ absent, build-dep, fixed, installed, latest, present, removed ] 
     required: true
   use:
     description:
       - The required package manager module to use (yum, apt, etc). The default 'auto' will use existing facts or try to autodetect it.
       - You should only use this field if the automatic selection is not working for some reason.
+    type: str
     required: false
     default: auto
 requirements:
